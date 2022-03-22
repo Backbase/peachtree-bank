@@ -7,9 +7,9 @@ import {
   InitiatePaymentJourneyCommunicationService,
   InitiatePaymentJourneyComponentApi,
   PaymentMode,
+  ReviewScreens,
   TriggerInitiatePaymentPayload,
 } from '@backbase/initiate-payment-journey-ang';
-import { ReviewScreens } from '@backbase/payment-orders-ang';
 
 @Injectable({
   providedIn: 'root',

@@ -6,9 +6,9 @@ import {
   INITIATE_PAYMENT_JOURNEY_COMMUNICATOR,
   P2P_TRANSFER,
   PayordOmniPaymentConfigProvider,
+  ReviewScreens,
 } from '@backbase/initiate-payment-journey-ang';
 import { PaymentsCommunicationService } from '../../communication/payments-communication.service';
-import { ReviewScreens } from '@backbase/payment-orders-ang';
 
 @NgModule({
   imports: [InitiatePaymentJourneyModule.forRoot()],
