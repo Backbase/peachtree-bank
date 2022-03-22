@@ -34,13 +34,18 @@ export class PaymentsCommunicationService
     }
     const route = this.getPaymentRoute(payment.paymentType);
     this.paymentData = {
-      payment,
+      payment: {
+        ...payment,
+        paymentType: payment.paymentType === 'EXTERNAL_A2A' ? 'INTERNAL_TRANSFER' : payment.paymentType,
+      },
       options: {
         paymentMode: PaymentMode.EDIT_PAYMENT,
         enablePaymentTemplateSelector: false,
         enableSavePaymentAsTemplate: false,
         reviewScreenType: ReviewScreens.ADAPTED,
         isModalView: false,
+        isOneOffToRecurrentAllowed: true,
+        isRecurrentToOneOffAllowed: true,
       },
     };
 

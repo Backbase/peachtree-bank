@@ -12,9 +12,9 @@ import { BillpayCommunication } from '../../communication/billpay-communication.
   providers: [
     {
       provide: ManageBillPaymentsJourneyConfigurationToken,
-      useValue: <ManageBillPaymentsJourneyConfiguration>{
+      useValue: {
         pageTitle: 'Pending Payments',
-      },
+      } as ManageBillPaymentsJourneyConfiguration,
     },
     {
       provide: ManageBillPaymentsCommunicationService,

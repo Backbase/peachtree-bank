@@ -12,10 +12,10 @@ import { BillpayCommunication } from '../../communication/billpay-communication.
   providers: [
     {
       provide: ManagePayeesJourneyConfigurationToken,
-      useValue: <ManagePayeesJourneyConfiguration>{
+      useValue: {
         notificationDismissTime: 3000,
         multipleBillsMode: true,
-      },
+      } as ManagePayeesJourneyConfiguration,
     },
     {
       provide: ManagePayeesCommunicationService,

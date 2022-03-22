@@ -1,9 +1,10 @@
 import { NgModule, Provider } from '@angular/core';
+import { PUBSUB, PubSubService } from '@backbase/foundation-ang/web-sdk';
 import {
-  AccountsTransactionsJourneyModule,
-  AccountsTransactionsJourneyConfigurationToken,
-  AccountsTransactionsJourneyConfiguration,
   AccountsPaymentsCommunication,
+  AccountsTransactionsJourneyConfiguration,
+  AccountsTransactionsJourneyConfigurationToken,
+  AccountsTransactionsJourneyModule,
 } from '@backbase/accounts-transactions-journey-ang';
 import { AccountsInitiatePaymentCommunication } from '../../communication/accounts-initiate-payment-communication.service';
 
@@ -21,6 +22,7 @@ const AccountsTransactionsConfigProvider: Provider = {
   providers: [
     AccountsTransactionsConfigProvider,
     { provide: AccountsPaymentsCommunication, useExisting: AccountsInitiatePaymentCommunication },
+    { provide: PUBSUB, useExisting: PubSubService },
   ],
 })
 export class AccountsTransactionsJourneyBundleModule {}

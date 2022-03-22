@@ -31,6 +31,7 @@ import { ACTIONS_BASE_PATH } from '@backbase/data-ang/actions';
 import { CONSENT_BASE_PATH } from '@backbase/data-ang/consent';
 import { FINANCIAL_INSTITUTION_MANAGER_BASE_PATH } from '@backbase/data-ang/financial-institution-manager';
 import { CASH_FLOW_BASE_PATH } from '@backbase/data-ang/cash-flow';
+import { ENGAGEMENT_BASE_PATH } from '@backbase/data-ang/engagement';
 
 /**
  * Service paths for the individual data modules.
@@ -71,6 +72,7 @@ const dataModulePaths: [InjectionToken<string>, string][] = [
   [STOP_CHECKS_BASE_PATH, '/stop-checks'],
   [TRANSACTIONS_BASE_PATH, '/transaction-manager'],
   [USER_BASE_PATH, '/user-manager'],
+  [ENGAGEMENT_BASE_PATH, '/engagement'],
 ];
 
 /**
