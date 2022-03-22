@@ -8,9 +8,9 @@ import {
 
 const IncomeAnalysisConfigProvider: Provider = {
   provide: IncomeSpendingAnalysisJourneyConfigurationToken,
-  useValue: {
+  useValue: <IncomeSpendingAnalysisJourneyConfiguration>{
     analysisType: AnalysisType.INCOME,
-  } as IncomeSpendingAnalysisJourneyConfiguration,
+  },
 };
 
 @NgModule({

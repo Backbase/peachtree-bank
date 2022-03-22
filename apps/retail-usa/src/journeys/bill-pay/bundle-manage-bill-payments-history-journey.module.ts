@@ -11,10 +11,10 @@ import {
   providers: [
     {
       provide: ManageBillPaymentsJourneyConfigurationToken,
-      useValue: {
+      useValue: <ManageBillPaymentsJourneyConfiguration>{
         pageFilter: PaymentsFilterStatus.HISTORICAL,
         pageTitle: 'History Payments',
-      } as ManageBillPaymentsJourneyConfiguration,
+      },
     },
   ],
 })

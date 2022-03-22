@@ -20,7 +20,7 @@ pipeline {
   environment {
     PROJECT                   = "BSFG"
     REPO                      = "backbase-banking-apps"
-    RELEASE_ON_MERGE_TO       = /(develop|release\/(\d+\.)+\d+)$/
+    RELEASE_ON_MERGE_TO       = /(main|release\/(\d+\.)+\d+)$/
     NODE_JS_INSTALLATION_NAME = "${Monorepo.NODE_INSTALLATION_NAME}"
     SETTINGS_ID               = "33802177-400f-414c-9807-fdc9d63daa33"
     TARGET_BRANCH             = "${env.CHANGE_TARGET && env.CHANGE_TARGET.length() ? env.CHANGE_TARGET : env.BRANCH_NAME}"
@@ -32,7 +32,6 @@ pipeline {
 
     stage('Set up') {
       steps {
-        echo BRANCH_NAME
         runFeSetupWorkspace()
       }
     }
@@ -74,7 +73,7 @@ pipeline {
       steps {
         script {
           nodejs(nodeJSInstallationName: NODE_JS_INSTALLATION_NAME, configId: env.NPM_SETTINGS_ID) {
-            sh "npx nx affected:build --prod --parallel=1 ${env.CHANGE_TARGET ? "--base=origin/${env.CHANGE_TARGET}" : "--head=origin/${env.TARGET_BRANCH} --base=HEAD~1"}"
+            sh "npx nx affected:build --prod --parallel=1 ${env.CHANGE_TARGET ? "--base origin/${env.CHANGE_TARGET}" : "--head=${env.TARGET_BRANCH} --base=HEAD~1"}"
           }
         }
       }
@@ -87,7 +86,7 @@ pipeline {
           steps {
             script {
               nodejs(nodeJSInstallationName: env.NODE_JS_INSTALLATION_NAME, configId: env.NPM_SETTINGS_ID) {
-                sh "npx nx affected:test ${env.CHANGE_TARGET ? "--base=origin/${env.CHANGE_TARGET}" : "--head=origin/${env.TARGET_BRANCH} --base=HEAD~1"}"
+                sh "npx nx affected:test ${env.CHANGE_TARGET ? "--base origin/${env.CHANGE_TARGET}" : "--head=${env.TARGET_BRANCH} --base=HEAD~1"}"
               }
             }
           }
@@ -114,7 +113,7 @@ pipeline {
         expression {
           script {
             nodejs(nodeJSInstallationName: env.NODE_JS_INSTALLATION_NAME, configId: env.NPM_SETTINGS_ID) {
-              def affected = sh(script: "npx nx print-affected --select=projects ${env.CHANGE_TARGET ? "--base=origin/${env.CHANGE_TARGET}" : "--head=origin/${env.TARGET_BRANCH} --base=HEAD~1"}", returnStdout: true).trim()
+              def affected = sh(script: "npx nx print-affected --select=projects ${env.CHANGE_TARGET ? "--base origin/${env.CHANGE_TARGET}" : "--head=${env.TARGET_BRANCH} --base=HEAD~1"}", returnStdout: true).trim()
               return !affected.isEmpty()
             }
           }
@@ -122,12 +121,6 @@ pipeline {
       }
       steps {
         runFeSonar()
-      }
-    }
-
-    stage('Blackduck security scan') {
-      steps {
-        runFeBlackDuckScan()
       }
     }
 
@@ -154,14 +147,14 @@ pipeline {
             sh "echo ${ARTIFACTORY_PASSWORD} | docker login repo.backbase.com -u ${ARTIFACTORY_USERNAME} --password-stdin"
 
             nodejs(nodeJSInstallationName: env.NODE_JS_INSTALLATION_NAME, configId: env.NPM_SETTINGS_ID) {
-              sh "npx nx affected ${env.CHANGE_TARGET ? "--base=origin/${env.CHANGE_TARGET}" : "--head=origin/${env.TARGET_BRANCH} --base=HEAD~2"} --target=build-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=${imageTag}"
-              sh "npx nx affected ${env.CHANGE_TARGET ? "--base=origin/${env.CHANGE_TARGET}" : "--head=origin/${env.TARGET_BRANCH} --base=HEAD~2"} --target=build-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=latest"
+              sh "npx nx affected ${env.CHANGE_TARGET ? "--base origin/${env.CHANGE_TARGET}" : "--head=${env.TARGET_BRANCH} --base=HEAD~2"} --target=build-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=${imageTag}"
+              sh "npx nx affected ${env.CHANGE_TARGET ? "--base origin/${env.CHANGE_TARGET}" : "--head=${env.TARGET_BRANCH} --base=HEAD~2"} --target=build-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=latest"
 
-              sh "npx nx affected ${env.CHANGE_TARGET ? "--base=origin/${env.CHANGE_TARGET}" : "--head=origin/${env.TARGET_BRANCH} --base=HEAD~2"} --target=push-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=${imageTag}"
-              sh "npx nx affected ${env.CHANGE_TARGET ? "--base=origin/${env.CHANGE_TARGET}" : "--head=origin/${env.TARGET_BRANCH} --base=HEAD~2"} --target=push-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=latest"
+              sh "npx nx affected ${env.CHANGE_TARGET ? "--base origin/${env.CHANGE_TARGET}" : "--head=${env.TARGET_BRANCH} --base=HEAD~2"} --target=push-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=${imageTag}"
+              sh "npx nx affected ${env.CHANGE_TARGET ? "--base origin/${env.CHANGE_TARGET}" : "--head=${env.TARGET_BRANCH} --base=HEAD~2"} --target=push-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=latest"
 
-              sh "npx nx affected ${env.CHANGE_TARGET ? "--base=origin/${env.CHANGE_TARGET}" : "--head=origin/${env.TARGET_BRANCH} --base=HEAD~2"} --target=remove-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=${imageTag}"
-              sh "npx nx affected ${env.CHANGE_TARGET ? "--base=origin/${env.CHANGE_TARGET}" : "--head=origin/${env.TARGET_BRANCH} --base=HEAD~2"} --target=remove-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=latest"
+              sh "npx nx affected ${env.CHANGE_TARGET ? "--base origin/${env.CHANGE_TARGET}" : "--head=${env.TARGET_BRANCH} --base=HEAD~2"} --target=remove-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=${imageTag}"
+              sh "npx nx affected ${env.CHANGE_TARGET ? "--base origin/${env.CHANGE_TARGET}" : "--head=${env.TARGET_BRANCH} --base=HEAD~2"} --target=remove-docker --docker-registry=${env.DOCKER_REGISTRY}/${env.HARBOR_PROJECT} --image-tag=latest"
             }
           }
         }
