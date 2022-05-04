@@ -6,25 +6,26 @@
  *
  */
 
-import { AppCoreModule } from '@backbase/common-banking';
 import { RemoteConfigModule } from '@backbase/remote-config-ang';
+import { AuthModule } from '@backbase/shared/feature/auth';
+import { SharedAppCoreModule } from '@backbase/shared/util/app-core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { remoteConfigDefaults } from '../remote-config/remote-config';
+import { authConfig, environment } from '../environments/environment';
 import { AppDataModule } from './app-data.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './auth/auth.module';
-import { RetailModule } from './retail/retail.module';
-import { environment } from '../environments/environment';
+import { LayoutModule } from './layout/layout.module';
+import { remoteConfigDefaults } from './remote-config/remote-config';
+import { RoutableModalModule } from './routable-modal/routable-modal.module';
 
 /**
  * Modules in this array are added to the `imports` array of the AppModule
  * in app.module.ts.
  */
 export const appModuleImports = [
-  AppCoreModule.forRoot(environment),
-  AuthModule,
-  RetailModule,
+  SharedAppCoreModule.forRoot(environment),
+  AuthModule.forRoot(environment.apiRoot, authConfig),
+  LayoutModule,
   AppDataModule,
   AppRoutingModule,
   StoreModule.forRoot({}),
@@ -37,4 +38,5 @@ export const appModuleImports = [
     projectName: 'backbase-retail-prototypes',
     serviceRoot: '/api/remote-config',
   }),
+  RoutableModalModule,
 ];

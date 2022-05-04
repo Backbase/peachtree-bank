@@ -35,8 +35,7 @@ html {
     width: 94px;
     height: 100px;
 
-    // this way asset gets processed by webpack
-    background: url(./assets/bb-login-with-signup-widget-ang/logo-emblem.svg) center center no-repeat;
+    background: url(/assets/bb-login-with-signup-widget-ang/logo-emblem.svg) center center no-repeat;
   }
 }
 

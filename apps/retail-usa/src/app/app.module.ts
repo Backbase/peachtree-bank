@@ -1,28 +1,29 @@
-import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { RetailAppRemoteConfig } from '../remote-config/remote-config';
-import { environment } from '../environments/environment';
-import { appModuleImports } from './app-module-imports';
-import { BankingComponent } from './banking/banking.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TemplateRegistry } from '@backbase/foundation-ang/core';
-import { AuthInterceptor } from './auth/auth.interceptor';
+import { TransactionSigningModule } from '@backbase/identity-auth/transaction-signing';
+import { IdentityAuthModule } from '@backbase/identity-auth';
 import { RemoteConfigService } from '@backbase/remote-config-ang';
-import { TransactionSigningModule } from '@backbase/identity-transaction-signing';
+import { AuthInterceptor } from '@backbase/shared/feature/auth';
+import { environment } from '../environments/environment';
+import { appModuleImports } from './app-module-imports';
+import { AppComponent } from './app.component';
+import { RetailAppRemoteConfig } from './remote-config/remote-config';
 
 export function applicationInitializer(remoteConfig: RemoteConfigService<RetailAppRemoteConfig>) {
   return () => remoteConfig.fetchAndActivate();
 }
 
 @NgModule({
-  declarations: [AppComponent, BankingComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     HttpClientXsrfModule,
     TransactionSigningModule,
+    IdentityAuthModule,
     environment.animation ? BrowserAnimationsModule : NoopAnimationsModule,
     ...appModuleImports,
   ],

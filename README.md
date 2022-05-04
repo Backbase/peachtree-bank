@@ -2,6 +2,46 @@
 
 This project was generated using [Nx](https://nx.dev).
 
+## Project structure
+
+The project structure significantly changed comparing to the banking-schematics app.
+There is no more schematics, a project generation approach and a page-model.
+
+### Apps
+
+An average app looks like that:
+
+```
+src/
+├── app/
+│   ├── auth/
+│   ├── journeys/
+│   ├── layout/
+│   │   ├─ navigation-menu/
+│   │   └─ lyout.*.ts|html|scss
+│   ├── routable-modal/
+│   └── user-context/
+│       app.*.component.ts|html|scss
+│       app.*.module.ts
+├── environemt/
+├── locale/
+└── ...
+```
+
+The major parts are:
+
+- `auth` - authentication related configuration, e.g. permission
+- `journeys` - all bundle modules for used journeys. An inner structure may vary depending on an app, and it's mostly migrated from an approach used in schematics
+- `layout` - module that defines an app layout. It uses an app specific `navigation menu` and a shared monorepo library for a _scope/region_.
+- `routable-modal` - a module with configuration for a routable modal
+- `user-context` - a module that defines a select-context page of an app
+
+### Libs
+
+At the root along with a standard `apps` now exists `libs` folder. It contains libs for specific scopes of apps and ones shared across all apps.
+If an app has a folder with the same name, then it gives a basis for the app functionality, i.e. it's not an overwriting but an extension.  
+The `libs` folder follows naming convention provided by Nx. That means that prefixes as `feature-`, `ui-`, etc. gives the idea about a library type.
+
 ## Documentation
 
 - [Nx Documentation](https://nx.dev/angular)
@@ -26,12 +66,9 @@ When creating a PR:
 
 By default, api request will be proxying to BaaS env:
 
-- [proxy-bus-un-s.conf.js](./proxy-bus-un-s.conf.js)
-- [proxy-bus-us-s.conf.js](./proxy-bus-us-s.conf.js)
 - [proxy-ret-us-l.conf.js](./proxy-ret-us-l.conf.js)
-- [proxy-wealth.conf.js](./proxy-wealth.conf.js)
 
-Please follow [this guideline](https://backbase.atlassian.net/wiki/spaces/BUSB/pages/3252095286/Starting+out+with+BaaS#Accessing-BaaS-as-an-end-user) to access BaaS from your local
+You can alter the configuration to the one that suits your best. To do it change `target` to a required uri. For more information you can check [Angular docs](https://angular.io/guide/build#proxying-to-a-backend-server).
 
 ### Install NX Cli
 
@@ -48,17 +85,8 @@ Run `nx serve <app-name>` for a dev server. Navigate to http://localhost:4200/. 
 Example:
 
 ```bash
-## Business Banking USA
-nx serve business-usa
-
-## Business Banking Universal
-nx serve business-universal
-
-## Retail USA
+## Retail Banking USA
 nx serve retail-usa
-
-## Wealth
-nx serve wealth-app
 ```
 
 ### Build
@@ -68,17 +96,8 @@ Run `nx build <app-name>` to build the project. The build artifacts will be stor
 Example:
 
 ```bash
-## Business Banking USA
-nx build business-usa
-
-## Business Banking Universal
-nx build business-universal
-
-## Retail USA
+## Retail Banking USA
 nx build retail-usa
-
-## Wealth
-nx build wealth-app
 ```
 
 ### Build Docker Image
@@ -88,11 +107,11 @@ nx build wealth-app
 ```bash
 ## Prerequisite: Build the app `nx build <app-name>`
 ## Example:
-nx build business-usa
+nx build retail-usa
 
 ## nx build-docker <app-name> --docker-registry=<your-docker-registry> --image-tag=<tag>
 ## Example:
-nx build-docker business-usa --docker-registry=harbor.backbase.eu/development/business-web-app-test --image-tag=0.0.14
+nx build-docker retail-usa --docker-registry=harbor.backbase.eu/development/retail-web-app --image-tag=0.0.14
 ```
 
 #### For the affected Apps
@@ -116,7 +135,7 @@ If you want to set your own docker registry and image tag, please set the follow
 ```bash
 ## export CHANGE_DOCKER_REGISTRY=<your-docker-registry>
 ## Example:
-export CHANGE_DOCKER_REGISTRY=harbor.backbase.eu/development/business-web-app-test
+export CHANGE_DOCKER_REGISTRY=harbor.backbase.eu/development/retail-web-app
 
 ## export CHANGE_IMAGE_TAG=<image.tag>
 ## Example:

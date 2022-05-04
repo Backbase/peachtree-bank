@@ -2,8 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { mockProviders } from './mock-providers';
 import { AuthConfig } from 'angular-oauth2-oidc';
+import { mockProviders } from './mock-providers';
 import { Environment } from './type';
 
 export const environment: Environment = {
@@ -27,6 +27,7 @@ export const environment: Environment = {
   apiRoot: '/api',
   baseHref: '/',
   googleApiKey: 'AIzaSyBER_2nN8NbwS0od7mSG0bQXbj6xTlR80w',
+  notificationPreferencesApiMode: 'actions',
 };
 
 /*

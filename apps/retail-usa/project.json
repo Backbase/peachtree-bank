@@ -14,7 +14,18 @@
         "polyfills": "apps/retail-usa/src/polyfills.ts",
         "tsConfig": "apps/retail-usa/tsconfig.app.json",
         "aot": true,
-        "assets": ["apps/retail-usa/src/favicon.ico", "apps/retail-usa/src/assets"],
+        "assets": [
+          {
+            "input": "libs/retail/assets/src",
+            "glob": "favicon.ico",
+            "output": "."
+          },
+          {
+            "input": "libs/retail/assets/src/assets",
+            "glob": "**/*",
+            "output": "assets"
+          }
+        ],
         "styles": ["apps/retail-usa/src/styles.scss"],
         "scripts": []
       },
@@ -114,5 +125,6 @@
       }
     }
   },
-  "tags": ["scope:retail", "region:usa", "type:app"]
+  "tags": ["scope:retail", "region:usa", "type:app"],
+  "implicitDependencies": ["retail-assets"]
 }

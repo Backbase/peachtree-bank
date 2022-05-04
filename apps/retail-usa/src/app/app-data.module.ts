@@ -8,29 +8,30 @@
  */
 import { InjectionToken, NgModule } from '@angular/core';
 import { ACCESS_CONTROL_BASE_PATH } from '@backbase/data-ang/accesscontrol';
-import { TRANSACTIONS_BASE_PATH } from '@backbase/data-ang/transactions';
-import { PLACES_BASE_PATH } from '@backbase/data-ang/places';
-import { environment } from '../environments/environment';
-import { NOTIFICATIONS_BASE_PATH } from '@backbase/data-ang/notifications';
-import { USER_BASE_PATH } from '@backbase/data-ang/user';
-import { AUTHORIZED_USER_BASE_PATH } from '@backbase/data-ang/authorized-users';
+import { ACCOUNT_STATEMENT_BASE_PATH } from '@backbase/data-ang/account-statements';
+import { ACTIONS_BASE_PATH } from '@backbase/data-ang/actions';
 import { ARRANGEMENT_MANAGER_BASE_PATH } from '@backbase/data-ang/arrangements';
+import { AUTHORIZED_USER_BASE_PATH } from '@backbase/data-ang/authorized-users';
+import { BILLPAY_BASE_PATH } from '@backbase/data-ang/billpay';
 import { BUDGETING_BASE_PATH } from '@backbase/data-ang/budgeting';
 import { CARDS_BASE_PATH } from '@backbase/data-ang/cards';
-import { CONTACT_MANAGER_BASE_PATH } from '@backbase/data-ang/contact-manager';
-import { MESSAGES_BASE_PATH } from '@backbase/data-ang/messages';
-import { SAVING_GOALS_BASE_PATH } from '@backbase/data-ang/saving-goals';
-import { CATEGORIES_MANAGEMENT_BASE_PATH } from '@backbase/data-ang/categories-management';
-import { BILLPAY_BASE_PATH } from '@backbase/data-ang/billpay';
-import { PAYMENT_ORDER_BASE_PATH } from '@backbase/data-ang/payment-order';
-import { STOP_CHECKS_BASE_PATH } from '@backbase/data-ang/stop-checks';
-import { ACCOUNT_STATEMENT_BASE_PATH } from '@backbase/data-ang/account-statements';
-import { DEVICE_BASE_PATH } from '@backbase/data-ang/device';
-import { PAYMENT_ORDER_A2A_BASE_PATH } from '@backbase/data-ang/payment-order-a2a';
-import { ACTIONS_BASE_PATH } from '@backbase/data-ang/actions';
-import { CONSENT_BASE_PATH } from '@backbase/data-ang/consent';
-import { FINANCIAL_INSTITUTION_MANAGER_BASE_PATH } from '@backbase/data-ang/financial-institution-manager';
 import { CASH_FLOW_BASE_PATH } from '@backbase/data-ang/cash-flow';
+import { CATEGORIES_MANAGEMENT_BASE_PATH } from '@backbase/data-ang/categories-management';
+import { CONSENT_BASE_PATH } from '@backbase/data-ang/consent';
+import { CONTACT_MANAGER_BASE_PATH } from '@backbase/data-ang/contact-manager';
+import { DEVICE_BASE_PATH } from '@backbase/data-ang/device';
+import { ENGAGEMENT_BASE_PATH } from '@backbase/data-ang/engagement';
+import { FINANCIAL_INSTITUTION_MANAGER_BASE_PATH } from '@backbase/data-ang/financial-institution-manager';
+import { MESSAGES_BASE_PATH } from '@backbase/data-ang/messages';
+import { NOTIFICATIONS_BASE_PATH } from '@backbase/data-ang/notifications';
+import { PAYMENT_ORDER_BASE_PATH } from '@backbase/data-ang/payment-order';
+import { PAYMENT_ORDER_A2A_BASE_PATH } from '@backbase/data-ang/payment-order-a2a';
+import { PLACES_BASE_PATH } from '@backbase/data-ang/places';
+import { SAVING_GOALS_BASE_PATH } from '@backbase/data-ang/saving-goals';
+import { STOP_CHECKS_BASE_PATH } from '@backbase/data-ang/stop-checks';
+import { TRANSACTIONS_BASE_PATH } from '@backbase/data-ang/transactions';
+import { USER_BASE_PATH } from '@backbase/data-ang/user';
+import { environment } from '../environments/environment';
 
 /**
  * Service paths for the individual data modules.
@@ -61,6 +62,7 @@ const dataModulePaths: [InjectionToken<string>, string][] = [
   [CONSENT_BASE_PATH, '/consent'],
   [CONTACT_MANAGER_BASE_PATH, '/contact-manager'],
   [DEVICE_BASE_PATH, '/device-management-service'],
+  [ENGAGEMENT_BASE_PATH, '/engagement'],
   [FINANCIAL_INSTITUTION_MANAGER_BASE_PATH, '/financial-institution-manager'],
   [NOTIFICATIONS_BASE_PATH, '/notifications-service'],
   [MESSAGES_BASE_PATH, '/messages-service'],
@@ -71,6 +73,7 @@ const dataModulePaths: [InjectionToken<string>, string][] = [
   [STOP_CHECKS_BASE_PATH, '/stop-checks'],
   [TRANSACTIONS_BASE_PATH, '/transaction-manager'],
   [USER_BASE_PATH, '/user-manager'],
+  [ENGAGEMENT_BASE_PATH, '/engagement'],
 ];
 
 /**

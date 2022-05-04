@@ -6,41 +6,23 @@
  *
  *
  */
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Provider } from '@angular/core';
-import { TemplateRegistry } from '@backbase/foundation-ang/core';
-import { createMocks, createMocksInterceptor } from '@backbase/foundation-ang/data-http';
-import { ContactsHttpServiceMocksProvider } from '@backbase/data-ang/contact-manager';
-import { PaymentOrdersHttpServiceMocksProvider } from '@backbase/data-ang/payment-order';
-import { A2aClientHttpServiceMocksProvider } from '@backbase/data-ang/payment-order-a2a';
 import {
-  CategoryPeriodTotalsHttpServiceMocksProvider,
-  CategoryTotalsHttpServiceMocksProvider,
-  TransactionClientHttpServiceMocksProvider,
-  TurnoversHttpServiceMocksProvider,
-} from '@backbase/data-ang/transactions';
-import { PlacesHttpServiceMocksProvider } from '@backbase/data-ang/places';
-import { NotificationsMocksProvider } from '@backbase/notifications-mocks-provider-ang';
-import { MessagecenterHttpServiceMocksProvider } from '@backbase/data-ang/messages';
-import { CardsHttpServiceMocksProvider, TravelNoticesHttpServiceMocksProvider } from '@backbase/data-ang/cards';
-import {
-  IdentityManagementServiceMocksProvider,
-  UserManagementServiceMocksProvider,
-  UserProfileManagementServiceMocksProvider,
-} from '@backbase/data-ang/user';
-import {
-  ManageMyDevicesServiceMocksProvider,
-  ManageOtherUsersDevicesServiceMocksProvider,
-} from '@backbase/data-ang/device';
-import {
-  ConsentsHttpServiceMocksProvider,
-  PaymentRequestsHttpServiceMocksProvider,
-  ConsentRequestsHttpServiceMocksProvider,
-} from '@backbase/data-ang/consent';
-import { SavinggoalsHttpServiceMocksProvider } from '@backbase/data-ang/saving-goals';
-import { SelfEnrollmentServiceMocksProvider } from '@backbase/data-ang/self-enrollment';
+  ServiceAgreementHttpServiceMocksProvider,
+  ServiceAgreementsHttpServiceMocksProvider,
+  UsersHttpServiceGetArrangementUserPrivilegesMocksProvider,
+  UsersHttpServiceGetCheckUserPermissionMocksProvider,
+  UsersHttpServiceGetDataItemPermissionsContextMocksProvider,
+  UsersHttpServiceGetUserPrivilegesMocksProvider,
+  UsersHttpServiceGetUsersByPermissionsMocksProvider,
+  UsersHttpServiceMocksProvider,
+} from '@backbase/data-ang/accesscontrol';
 import { AccountStatementHttpServiceMocksProvider } from '@backbase/data-ang/account-statements';
-import { BudgetsHttpServiceMocksProvider } from '@backbase/data-ang/budgeting';
-import { CategoriesHttpServiceMocksProvider } from '@backbase/data-ang/categories-management';
+import {
+  ActionRecipesHttpServiceMocksProvider,
+  ActionRecipeSpecificationsHttpServiceMocksProvider,
+} from '@backbase/data-ang/actions';
 import {
   AccountsHttpServiceMocksProvider,
   ArrangementsHttpServiceMocksProvider,
@@ -48,6 +30,14 @@ import {
   ProductKindsHttpServiceMocksProvider,
   ProductSummaryHttpServiceMocksProvider,
 } from '@backbase/data-ang/arrangements';
+import { ActionsMocksProvider } from '@backbase/actions-mocks-provider-ang';
+import {
+  NotificationPreferenceServiceCreateNotificationPreferenceMocksProvider,
+  NotificationPreferenceServiceGetNotificationPreferencesMocksProvider,
+  NotificationPreferenceServiceUpdateNotificationPreferenceMocksProvider,
+  NotificationPreferenceServiceMocksProvider,
+} from '@backbase/data-ang/engagement';
+import { AuthorizedUserServiceMocksProvider } from '@backbase/data-ang/authorized-users';
 import {
   BillPayAccountsServiceMocksProvider,
   BillPayAutopayServiceMocksProvider,
@@ -59,28 +49,46 @@ import {
   BillPayPayverisServiceMocksProvider,
   BillPaySearchServiceMocksProvider,
 } from '@backbase/data-ang/billpay';
+import { BudgetsHttpServiceMocksProvider } from '@backbase/data-ang/budgeting';
+import { CardsHttpServiceMocksProvider, TravelNoticesHttpServiceMocksProvider } from '@backbase/data-ang/cards';
+import { CategoriesHttpServiceMocksProvider } from '@backbase/data-ang/categories-management';
 import {
-  ActionRecipesHttpServiceMocksProvider,
-  ActionRecipeSpecificationsHttpServiceMocksProvider,
-} from '@backbase/data-ang/actions';
-import { StopChecksHttpServiceMocksProvider } from '@backbase/data-ang/stop-checks';
-import { NotificationsHttpServiceMocksProvider } from '@backbase/data-ang/notifications';
-import { AuthorizedUserServiceMocksProvider } from '@backbase/data-ang/authorized-users';
+  ConsentRequestsHttpServiceMocksProvider,
+  ConsentsHttpServiceMocksProvider,
+  PaymentRequestsHttpServiceMocksProvider,
+} from '@backbase/data-ang/consent';
+import { ContactsHttpServiceMocksProvider } from '@backbase/data-ang/contact-manager';
 import {
-  ServiceAgreementHttpServiceMocksProvider,
-  ServiceAgreementsHttpServiceMocksProvider,
-  UsersHttpServiceMocksProvider,
-  UsersHttpServiceGetUserPrivilegesMocksProvider,
-  UsersHttpServiceGetUsersByPermissionsMocksProvider,
-  UsersHttpServiceGetDataItemPermissionsContextMocksProvider,
-  UsersHttpServiceGetCheckUserPermissionMocksProvider,
-  UsersHttpServiceGetArrangementUserPrivilegesMocksProvider,
-} from '@backbase/data-ang/accesscontrol';
-import { PaymentTemplatesHttpServiceMocksProvider } from '@backbase/data-ang/payment-template';
-import { productSummaryContextArrangementsMocks } from './mock-data';
-import { SummaryMockInterceptor } from '../mocks/summary-mock-interceptor.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+  ManageMyDevicesServiceMocksProvider,
+  ManageOtherUsersDevicesServiceMocksProvider,
+} from '@backbase/data-ang/device';
+import { SelectCampaignServiceSelectCampaignMocksProvider } from '@backbase/data-ang/engagement';
 import { FinancialInstitutionManagerClientHttpServiceMocksProvider } from '@backbase/data-ang/financial-institution-manager';
+import { MessagecenterHttpServiceMocksProvider } from '@backbase/data-ang/messages';
+import { NotificationsHttpServiceMocksProvider } from '@backbase/data-ang/notifications';
+import { PaymentOrdersHttpServiceMocksProvider } from '@backbase/data-ang/payment-order';
+import { A2aClientHttpServiceMocksProvider } from '@backbase/data-ang/payment-order-a2a';
+import { PaymentTemplatesHttpServiceMocksProvider } from '@backbase/data-ang/payment-template';
+import { PlacesHttpServiceMocksProvider } from '@backbase/data-ang/places';
+import { SavinggoalsHttpServiceMocksProvider } from '@backbase/data-ang/saving-goals';
+import { SelfEnrollmentServiceMocksProvider } from '@backbase/data-ang/self-enrollment';
+import { StopChecksHttpServiceMocksProvider } from '@backbase/data-ang/stop-checks';
+import {
+  CategoryPeriodTotalsHttpServiceMocksProvider,
+  CategoryTotalsHttpServiceMocksProvider,
+  TransactionClientHttpServiceMocksProvider,
+  TurnoversHttpServiceMocksProvider,
+} from '@backbase/data-ang/transactions';
+import {
+  IdentityManagementServiceMocksProvider,
+  UserManagementServiceMocksProvider,
+  UserProfileManagementServiceMocksProvider,
+} from '@backbase/data-ang/user';
+import { TemplateRegistry } from '@backbase/foundation-ang/core';
+import { createMocks, createMocksInterceptor } from '@backbase/foundation-ang/data-http';
+import { NotificationsMocksProvider } from '@backbase/notifications-mocks-provider-ang';
+import { SummaryMockInterceptor } from '@backbase/retail/data-access-mocks';
+import { productSummaryContextArrangementsMocks } from './mock-data';
 
 const ProductSummaryContextArrangementsMockProvider = createMocks([
   {
@@ -105,6 +113,7 @@ export const mockProviders: Provider[] = [
     useClass: SummaryMockInterceptor,
     multi: true,
   },
+  ActionsMocksProvider,
   createMocksInterceptor(),
   NotificationsMocksProvider,
   ProductSummaryContextArrangementsMockProvider,
@@ -163,4 +172,9 @@ export const mockProviders: Provider[] = [
   UsersHttpServiceGetArrangementUserPrivilegesMocksProvider,
   PaymentTemplatesHttpServiceMocksProvider,
   FinancialInstitutionManagerClientHttpServiceMocksProvider,
+  NotificationPreferenceServiceCreateNotificationPreferenceMocksProvider,
+  NotificationPreferenceServiceGetNotificationPreferencesMocksProvider,
+  NotificationPreferenceServiceUpdateNotificationPreferenceMocksProvider,
+  NotificationPreferenceServiceMocksProvider,
+  SelectCampaignServiceSelectCampaignMocksProvider,
 ];

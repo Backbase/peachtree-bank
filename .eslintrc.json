@@ -21,6 +21,14 @@
                 "onlyDependOnLibsWithTags": ["scope:business", "scope:shared"]
               },
               {
+                "sourceTag": "scope:retail",
+                "onlyDependOnLibsWithTags": ["scope:retail", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:wealth",
+                "onlyDependOnLibsWithTags": ["scope:wealth", "scope:shared"]
+              },
+              {
                 "sourceTag": "region:usa",
                 "onlyDependOnLibsWithTags": ["region:usa", "region:agnostic"]
               },
@@ -34,11 +42,17 @@
               },
               {
                 "sourceTag": "type:app",
-                "onlyDependOnLibsWithTags": ["type:feature", "type:ui", "type:util", "type:mock-data-access"]
+                "onlyDependOnLibsWithTags": [
+                  "type:feature",
+                  "type:ui",
+                  "type:util",
+                  "type:data-access-mock",
+                  "type:assets"
+                ]
               },
               {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:feature", "type:ui", "type:util"]
+                "onlyDependOnLibsWithTags": ["type:feature", "type:ui", "type:util", "type:assets"]
               },
               {
                 "sourceTag": "type:ui",
@@ -49,8 +63,12 @@
                 "onlyDependOnLibsWithTags": ["type:util"]
               },
               {
-                "sourceTag": "type:mock-data-access",
-                "onlyDependOnLibsWithTags": ["type:mock-data-access", "type:feature"]
+                "sourceTag": "type:assets",
+                "onlyDependOnLibsWithTags": []
+              },
+              {
+                "sourceTag": "type:data-access-mock",
+                "onlyDependOnLibsWithTags": ["type:data-access-mock", "type:feature"]
               }
             ]
           }

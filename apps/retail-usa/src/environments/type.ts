@@ -9,4 +9,5 @@ export interface Environment {
   apiRoot: string;
   localize?: boolean;
   googleApiKey: string;
+  notificationPreferencesApiMode: string;
 }

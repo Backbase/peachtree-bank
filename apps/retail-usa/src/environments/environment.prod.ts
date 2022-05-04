@@ -1,6 +1,6 @@
+import { concatUrl } from '@backbase/shared/util/app-core';
 import { AuthConfig } from 'angular-oauth2-oidc';
 import { Environment } from './type';
-import { concatUrl } from '@backbase/common-banking';
 
 export const environment: Environment = {
   /**
@@ -22,6 +22,8 @@ export const environment: Environment = {
   apiRoot: '${API_ROOT::-1}',
   baseHref: '${BASE_HREF}',
   googleApiKey: 'AIzaSyBER_2nN8NbwS0od7mSG0bQXbj6xTlR80w',
+  // set which api will be used in ActionsRetailNotificationPreferencesJourneyBundleModule (actions or engagement)
+  notificationPreferencesApiMode: String('${NOTIFICATION_PREFERENCES_API_MODE}' as unknown as string),
 };
 
 export const authConfig: (baseUrl: string) => AuthConfig = (locale: string = '') => ({
