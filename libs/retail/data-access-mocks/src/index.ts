@@ -1,1 +1,1 @@
-export * from './lib/summary-mock-interceptor.service';
+export * from './lib/summary-mock.interceptor';

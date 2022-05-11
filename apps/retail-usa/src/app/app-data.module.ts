@@ -22,7 +22,7 @@ import { CONTACT_MANAGER_BASE_PATH } from '@backbase/data-ang/contact-manager';
 import { DEVICE_BASE_PATH } from '@backbase/data-ang/device';
 import { ENGAGEMENT_BASE_PATH } from '@backbase/data-ang/engagement';
 import { FINANCIAL_INSTITUTION_MANAGER_BASE_PATH } from '@backbase/data-ang/financial-institution-manager';
-import { MESSAGES_BASE_PATH } from '@backbase/data-ang/messages';
+import { MESSAGES_BASE_PATH } from '@backbase/messages-v5-http-ang';
 import { NOTIFICATIONS_BASE_PATH } from '@backbase/data-ang/notifications';
 import { PAYMENT_ORDER_BASE_PATH } from '@backbase/data-ang/payment-order';
 import { PAYMENT_ORDER_A2A_BASE_PATH } from '@backbase/data-ang/payment-order-a2a';
@@ -32,6 +32,7 @@ import { STOP_CHECKS_BASE_PATH } from '@backbase/data-ang/stop-checks';
 import { TRANSACTIONS_BASE_PATH } from '@backbase/data-ang/transactions';
 import { USER_BASE_PATH } from '@backbase/data-ang/user';
 import { environment } from '../environments/environment';
+import { LOANS_BASE_PATH } from '@backbase/data-ang/loans';
 
 /**
  * Service paths for the individual data modules.
@@ -74,6 +75,7 @@ const dataModulePaths: [InjectionToken<string>, string][] = [
   [TRANSACTIONS_BASE_PATH, '/transaction-manager'],
   [USER_BASE_PATH, '/user-manager'],
   [ENGAGEMENT_BASE_PATH, '/engagement'],
+  [LOANS_BASE_PATH, '/loan'],
 ];
 
 /**

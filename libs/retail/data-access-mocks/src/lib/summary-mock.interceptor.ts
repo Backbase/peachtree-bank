@@ -1,12 +1,13 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { MockInterceptor } from '@backbase/shared/util/app-core';
 
 @Injectable()
-export class SummaryMockInterceptor implements HttpInterceptor {
+export class SummaryMockInterceptor extends MockInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (
-      localStorage.getItem('enableMocks') === 'true' &&
+      this.areMocksEnabled() &&
       request.url.indexOf('/accessgroups/users/permissions/summary') !== -1 &&
       request.method === 'GET'
     ) {
@@ -68,6 +69,16 @@ const dumpFromWeb = [
       view: true,
       edit: true,
       delete: true,
+    },
+  },
+  {
+    additions: {},
+    resource: 'Communication Preferences',
+    function: 'General Notification Preferences',
+    permissions: {
+      create: true,
+      view: true,
+      edit: true,
     },
   },
   {

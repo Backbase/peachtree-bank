@@ -6,6 +6,7 @@ import {
   AccountsTransactionsJourneyConfiguration,
   AccountsTransactionsJourneyConfigurationToken,
   AccountsTransactionsJourneyModule,
+  ProductKindUri,
 } from '@backbase/accounts-transactions-journey-ang';
 import { PUBSUB, PubSubService } from '@backbase/foundation-ang/web-sdk';
 import {
@@ -19,7 +20,7 @@ const AccountsTransactionsConfigProvider: Provider = {
     showCheckImages: true,
     disputeTopicId: '',
     inquireTopicId: '',
-    productKindsWithExternalDetailsPage: [],
+    productKindsWithExternalDetailsPage: ProductKindUri.LOAN,
     accountAliasDisplayLevel: AccountAliasDisplayingLevel.USER,
   } as Partial<AccountsTransactionsJourneyConfiguration>,
 };

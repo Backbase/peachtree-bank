@@ -89,6 +89,7 @@ import { createMocks, createMocksInterceptor } from '@backbase/foundation-ang/da
 import { NotificationsMocksProvider } from '@backbase/notifications-mocks-provider-ang';
 import { SummaryMockInterceptor } from '@backbase/retail/data-access-mocks';
 import { productSummaryContextArrangementsMocks } from './mock-data';
+import { LoansHttpServiceMocksProvider } from '@backbase/data-ang/loans';
 
 const ProductSummaryContextArrangementsMockProvider = createMocks([
   {
@@ -177,4 +178,5 @@ export const mockProviders: Provider[] = [
   NotificationPreferenceServiceUpdateNotificationPreferenceMocksProvider,
   NotificationPreferenceServiceMocksProvider,
   SelectCampaignServiceSelectCampaignMocksProvider,
+  LoansHttpServiceMocksProvider,
 ];

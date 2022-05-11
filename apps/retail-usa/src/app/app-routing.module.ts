@@ -288,6 +288,11 @@ const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'my-accounts/loans/details',
+        loadChildren: () =>
+          import('./journeys/loans/loans-journey-bundle.module').then((m) => m.LoansJourneyBundleModule),
+      },
     ],
     canActivate: [AuthGuard, SharedUserContextGuard],
     canActivateChild: [EntitlementsGuard],

@@ -29,4 +29,6 @@ export const PERMISSIONS = {
   canViewBudgets: 'PersonalFinanceManagement.ManageBudgets.view',
   canViewMessages: 'MessageCenter.ManageMessages.view',
   canViewPlaces: 'MessageCenter.ManageMessages.view',
+  canViewGeneralNotificationPreferences:
+    'CommunicationPreferences.GeneralNotificationPreferences.view AND CommunicationPreferences.GeneralNotificationPreferences.create AND CommunicationPreferences.GeneralNotificationPreferences.edit',
 };

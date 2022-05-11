@@ -68,7 +68,7 @@
               },
               {
                 "sourceTag": "type:data-access-mock",
-                "onlyDependOnLibsWithTags": ["type:data-access-mock", "type:feature"]
+                "onlyDependOnLibsWithTags": ["type:data-access-mock", "type:feature", "type:util"]
               }
             ]
           }

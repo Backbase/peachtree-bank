@@ -102,3 +102,9 @@ html {
 .translucent {
   opacity: 0.92;
 }
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

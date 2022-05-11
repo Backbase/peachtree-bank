@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PERMISSIONS } from '../../../auth/permissions';
 import { QuickActionLink } from '../quick-actions.component';
 
 @Component({
@@ -50,6 +51,7 @@ export class AccountsTransactionsJourneyWrapperComponent {
       menuIcon: 'notifications-active',
       title: $localize`:Link Title|Manage notifications@@accounts.quick-actions.span.manageNotifications:Manage Notifications`,
       url: '/self-service/product-list/manage-notifications',
+      permission: PERMISSIONS.canViewManageNotifications,
     },
     {
       menuIcon: 'room',

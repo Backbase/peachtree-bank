@@ -20,6 +20,6 @@ export class AccountsCommunicationService implements AccountsCommunicationServic
   }
 
   private navigateToLoansInfoPage(accountId: string) {
-    this.router.navigate([`loans/details/${accountId}/info`], { relativeTo: this.route });
+    this.router.navigate([`my-accounts/loans/details/${accountId}/info`], { relativeTo: this.route });
   }
 }

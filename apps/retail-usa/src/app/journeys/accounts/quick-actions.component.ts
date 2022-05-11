@@ -4,8 +4,8 @@ export type QuickActionLink = {
   menuIcon: string;
   title: string;
   url: string;
+  permission?: string;
 };
-
 @Component({
   selector: 'bb-quick-actions',
   template: `
@@ -22,19 +22,36 @@ export type QuickActionLink = {
 
       <ul class="bb-navigation bb-navigation--link">
         <ng-container *ngFor="let link of links">
-          <li class="bb-navigation-item">
-            <a class="bb-inline-stack bb-navigation-item__link" [routerLink]="link.url" [attr.aria-label]="link.title">
-              <bb-icon-ui
-                class="bb-inline-stack__item bb-navigation-item__icon"
-                [name]="link.menuIcon"
-                size="md"
-              ></bb-icon-ui>
-              <span class="bb-inline-stack__item bb-navigation-item__title">{{ link.title }}</span>
-            </a>
-          </li>
+          <ng-container
+            *ngTemplateOutlet="!!link.permission ? linkBoxWithPermission : linkBox; context: { $implicit: link }"
+          >
+          </ng-container>
         </ng-container>
       </ul>
     </div>
+
+    <ng-template #linkBoxWithPermission let-link>
+      <li *bbIfEntitlements="link.permission" class="bb-navigation-item">
+        <ng-container *ngTemplateOutlet="linkElement; context: { $implicit: link }"></ng-container>
+      </li>
+    </ng-template>
+
+    <ng-template #linkBox let-link>
+      <li class="bb-navigation-item">
+        <ng-container *ngTemplateOutlet="linkElement; context: { $implicit: link }"></ng-container>
+      </li>
+    </ng-template>
+
+    <ng-template #linkElement let-link>
+      <a class="bb-inline-stack bb-navigation-item__link" [routerLink]="link.url" [attr.aria-label]="link.title">
+        <bb-icon-ui
+          class="bb-inline-stack__item bb-navigation-item__icon"
+          [name]="link.menuIcon"
+          size="md"
+        ></bb-icon-ui>
+        <span class="bb-inline-stack__item bb-navigation-item__title">{{ link.title }}</span>
+      </a>
+    </ng-template>
   `,
 })
 export class QuickActionsComponent {
